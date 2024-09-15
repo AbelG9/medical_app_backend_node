@@ -6,3 +6,68 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Patient {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.Text
+  lastname    String?  @db.Text
+  numDocument String   @map("num_document")
+  email       String   @unique
+  sexName     String?  @db.Text
+  status      Boolean  @default(true)
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  appointment Appointment[]
+
+  @@map("persons")
+}
+
+model Specialty {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.Text
+  description String?  @db.Text
+  code        String   @db.Text
+  status      Boolean  @default(true)
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  specialist Specialist[]
+
+  @@map("specialties")
+}
+
+model Specialist {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.Text
+  lastname    String?  @db.Text
+  cmpCode     Int      @map("cmp_code")
+  specialtyId Int      @map("specialty_code")
+  status      Boolean  @default(true)
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  specialty Specialty @relation(fields: [specialtyId], references: [id])
+
+  appointment Appointment[]
+
+  @@map("specialists")
+}
+
+model Appointment {
+  id            Int      @id @default(autoincrement())
+  patientId     Int      @map("patient_id")
+  doctorId      Int      @map("doctor_id")
+  officeNumber  String   @map("office_number") @db.Text
+  details       String   @db.Text
+  startTimeDate DateTime @map("start_timedate")
+  endTimeDate   DateTime @map("end_timedate")
+  status        Boolean  @default(true)
+  updatedAt     DateTime @updatedAt @map("updated_at")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  patient    Patient    @relation(fields: [patientId], references: [id])
+  specialist Specialist @relation(fields: [doctorId], references: [id])
+
+  @@map("appointments")
+}
