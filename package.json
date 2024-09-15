@@ -1,0 +1,29 @@
+{
+  "name": "medical_app_backend_node",
+  "version": "1.0.0",
+  "description": "Backend in node with express and prisma for medical app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbelG9/medical_app_backend_node.git"
+  },
+  "keywords": [
+    "medical",
+    "app",
+    "appointments",
+    "calendar",
+    "express",
+    "prisma",
+    "node",
+    "js"
+  ],
+  "author": "AbelG9",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbelG9/medical_app_backend_node/issues"
+  },
+  "homepage": "https://github.com/AbelG9/medical_app_backend_node#readme"
+}
