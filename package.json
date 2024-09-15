@@ -2,8 +2,10 @@
   "name": "medical_app_backend_node",
   "version": "1.0.0",
   "description": "Backend in node with express and prisma for medical app",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,5 +27,11 @@
   "bugs": {
     "url": "https://github.com/AbelG9/medical_app_backend_node/issues"
   },
-  "homepage": "https://github.com/AbelG9/medical_app_backend_node#readme"
+  "homepage": "https://github.com/AbelG9/medical_app_backend_node#readme",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }
