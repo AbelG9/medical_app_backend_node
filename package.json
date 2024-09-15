@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/AbelG9/medical_app_backend_node#readme",
   "dependencies": {
+    "@prisma/client": "^5.16.2",
     "express": "^4.21.0"
   },
   "devDependencies": {
