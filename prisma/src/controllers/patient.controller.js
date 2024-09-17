@@ -26,3 +26,18 @@ export const createPatient = async (req, res) => {
     content: patientCreated,
   });
 };
+
+export const getPatients = async (req, res) => {
+  const patientsRes = await conexion.patient.findMany();
+
+  if (patientsRes.length == 0) {
+    return res.status(200).json({
+      msg: "No Patients found!",
+    });
+  }
+
+  return res.status(200).json({
+    msg: "List of Patients:",
+    data: patientsRes,
+  });
+};
