@@ -4,6 +4,7 @@ import {
   createPatient,
   getPatients,
   getPatientById,
+  updatePatient,
 } from "../src/controllers/patient.controller.js";
 
 import asyncHandler from "express-async-handler";
@@ -15,4 +16,7 @@ api
   .post(asyncHandler(createPatient))
   .get(asyncHandler(getPatients));
 
-api.route("/patients/:id").get(asyncHandler(getPatientById));
+api
+  .route("/patients/:id")
+  .get(asyncHandler(getPatientById))
+  .put(asyncHandler(updatePatient));

@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export const createPatientSerializer = Joi.object({
+export const patientSerializer = Joi.object({
   name: Joi.string().required(),
   lastname: Joi.string().required(),
   numDocument: Joi.string().required(),
