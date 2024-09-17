@@ -30,14 +30,27 @@ export const createPatient = async (req, res) => {
 export const getPatients = async (req, res) => {
   const patientsRes = await conexion.patient.findMany();
 
-  if (patientsRes.length == 0) {
-    return res.status(200).json({
-      msg: "No Patients found!",
+  return res.status(200).json({
+    msg: "List of Patients:",
+    data: patientsRes,
+  });
+};
+
+export const getPatientById = async (req, res) => {
+  const { id } = req.params;
+
+  const patientRes = await conexion.patient.findUnique({
+    where: { id: +id },
+  });
+
+  if (!patientRes) {
+    return res.status(404).json({
+      msg: "No Patient found!",
     });
   }
 
   return res.status(200).json({
-    msg: "List of Patients:",
-    data: patientsRes,
+    msg: "Patient found:",
+    data: patientRes,
   });
 };
