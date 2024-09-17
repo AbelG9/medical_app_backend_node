@@ -2,7 +2,7 @@ import { patientSerializer } from "../serializers/patient.serializer.js";
 import { conexion } from "../../../client.js";
 
 export const createPatient = async (req, res) => {
-  const { error, value } = createPatientSerializer.validate(req.body);
+  const { error, value } = patientSerializer.validate(req.body);
 
   if (error) {
     return res.status(400).json({
@@ -29,6 +29,12 @@ export const createPatient = async (req, res) => {
 
 export const getPatients = async (req, res) => {
   const patientsRes = await conexion.patient.findMany();
+
+  if (patientsRes.length == 0) {
+    return res.status(200).json({
+      msg: "No Patients found!",
+    });
+  }
 
   return res.status(200).json({
     msg: "List of Patients:",
@@ -91,5 +97,28 @@ export const updatePatient = async (req, res) => {
   return res.status(200).json({
     msg: "Patient data updated!",
     data: editPatient,
+  });
+};
+
+export const deletePatient = async (req, res) => {
+  const { id } = req.params;
+
+  const patientRes = await conexion.patient.findUnique({
+    where: { id: +id },
+  });
+
+  if (!patientRes) {
+    return res.status(404).json({
+      msg: "No Patient found!",
+    });
+  }
+
+  const deletedPatient = await conexion.patient.delete({
+    where: { id: +id },
+  });
+
+  return res.status(200).json({
+    msg: "Patient deleted!",
+    data: deletedPatient,
   });
 };
