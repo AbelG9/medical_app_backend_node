@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import { api as routerApi } from "./prisma/router/patient.routes.js";
+import { api as routerApi } from "./router/patient.routes.js";
 
 const app = express();
 const port = 3000;

@@ -1,5 +1,5 @@
 import { patientSerializer } from "../serializers/patient.serializer.js";
-import { conexion } from "../../../client.js";
+import { conexion } from "../client.js";
 
 export const createPatient = async (req, res) => {
   const { error, value } = patientSerializer.validate(req.body);
