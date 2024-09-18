@@ -12,19 +12,19 @@ import {
 
 import asyncHandler from "express-async-handler";
 
-export const api = Router();
+export const patientApi = Router();
 
-api.route("/allPatients").get(asyncHandler(getPatients));
+patientApi.route("/all").get(asyncHandler(getPatients));
 
-api.route("/patients/totalCount").get(asyncHandler(getTotalRecords));
+patientApi.route("/totalCount").get(asyncHandler(getTotalRecords));
 
-api
-  .route("/patients")
+patientApi
+  .route("/")
   .post(asyncHandler(createPatient))
   .get(asyncHandler(getPatientsPaginated));
 
-api
-  .route("/patients/:id")
+  patientApi
+  .route("/:id")
   .get(asyncHandler(getPatientById))
   .put(asyncHandler(updatePatient))
   .delete(asyncHandler(deletePatient));
