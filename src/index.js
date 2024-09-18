@@ -1,9 +1,18 @@
 import express from "express";
 import morgan from "morgan";
 import { api as routerApi } from "./router/patient.routes.js";
+import cors from "cors";
 
 const app = express();
-const port = 3000;
+
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
+console.log(allowedOrigins);
+
+const corsOptions = {
+  origin: allowedOrigins,
+};
+
+app.use(cors(corsOptions));
 
 const errorHandler = (error, req, res, next) => {
   res.status(400).json({
@@ -20,9 +29,9 @@ app.use(errorHandler);
 app.use(`/api/v1`, routerApi);
 
 try {
-  app.listen(port, () => {
+  app.listen(PORT, () => {
     console.log(`Backend working succesfully on`);
-    console.log(`http://localhost:${port}/`);
+    console.log(`http://localhost:${PORT}/`);
   });
 } catch (error) {
   console.log(error);
