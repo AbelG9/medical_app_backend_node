@@ -122,3 +122,22 @@ export const deletePatient = async (req, res) => {
     data: deletedPatient,
   });
 };
+
+export const getPatientsPaginated = async (req, res) => {
+  const { page = 1, pageSize = 5 } = req.query;
+  const skip = (page - 1) * pageSize;
+
+  try {
+    const dataPatient = await conexion.patient.findMany({
+      skip: parseInt(skip),
+      take: parseInt(pageSize),
+      orderBy: {
+        id: "asc",
+      },
+    });
+    res.json(dataPatient);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};

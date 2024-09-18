@@ -6,16 +6,19 @@ import {
   getPatientById,
   updatePatient,
   deletePatient,
+  getPatientsPaginated,
 } from "../controllers/patient.controller.js";
 
 import asyncHandler from "express-async-handler";
 
 export const api = Router();
 
+api.route("/allPatients").get(asyncHandler(getPatients));
+
 api
   .route("/patients")
   .post(asyncHandler(createPatient))
-  .get(asyncHandler(getPatients));
+  .get(asyncHandler(getPatientsPaginated));
 
 api
   .route("/patients/:id")
