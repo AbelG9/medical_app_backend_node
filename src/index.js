@@ -12,7 +12,9 @@ const corsOptions = {
   origin: allowedOrigins,
 };
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
+app.use(cors({ origin: "*"}))
+
 
 const errorHandler = (error, req, res, next) => {
   res.status(400).json({
