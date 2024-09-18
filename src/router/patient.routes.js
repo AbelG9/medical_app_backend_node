@@ -7,6 +7,7 @@ import {
   updatePatient,
   deletePatient,
   getPatientsPaginated,
+  getTotalRecords,
 } from "../controllers/patient.controller.js";
 
 import asyncHandler from "express-async-handler";
@@ -14,6 +15,8 @@ import asyncHandler from "express-async-handler";
 export const api = Router();
 
 api.route("/allPatients").get(asyncHandler(getPatients));
+
+api.route("/patients/totalCount").get(asyncHandler(getTotalRecords));
 
 api
   .route("/patients")

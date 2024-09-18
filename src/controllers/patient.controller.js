@@ -37,7 +37,7 @@ export const getPatients = async (req, res) => {
   }
 
   return res.status(200).json({
-    msg: "List of Patients:",
+    msg: "List of Patients",
     data: patientsRes,
   });
 };
@@ -56,7 +56,7 @@ export const getPatientById = async (req, res) => {
   }
 
   return res.status(200).json({
-    msg: "Patient found:",
+    msg: "Patient found",
     data: patientRes,
   });
 };
@@ -141,3 +141,11 @@ export const getPatientsPaginated = async (req, res) => {
     return;
   }
 };
+
+export const getTotalRecords = async (req, res) => {
+  const totalRecords = await conexion.patient.count();
+  
+  return res.status(200).json({
+    count: totalRecords,
+  });
+}
