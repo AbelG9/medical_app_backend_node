@@ -1,11 +1,12 @@
 import express from "express";
 import morgan from "morgan";
 import { patientApi } from "./router/patient.routes.js";
+import { specialtyApi } from "./router/specialty.route.js";
 import cors from "cors";
 
 const app = express();
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
+const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",");
 console.log(allowedOrigins);
 
 const corsOptions = {
@@ -13,8 +14,7 @@ const corsOptions = {
 };
 
 //app.use(cors(corsOptions));
-app.use(cors({ origin: "*"}))
-
+app.use(cors({ origin: "*" }));
 
 const errorHandler = (error, req, res, next) => {
   res.status(400).json({
@@ -29,6 +29,7 @@ app.use(express.json());
 app.use(errorHandler);
 
 app.use(`/api/v1/patients`, patientApi);
+app.use(`/api/v1/specialties`, specialtyApi);
 
 try {
   app.listen(PORT, () => {
