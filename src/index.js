@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import { patientApi } from "./router/patient.routes.js";
 import { specialtyApi } from "./router/specialty.route.js";
+import { specialistApi } from "./router/specialist.route.js";
 import cors from "cors";
 
 const app = express();
@@ -30,11 +31,11 @@ app.use(errorHandler);
 
 app.use(`/api/v1/patients`, patientApi);
 app.use(`/api/v1/specialties`, specialtyApi);
+app.use(`/api/v1/specialists`, specialistApi);
 
 try {
   app.listen(PORT, () => {
-    console.log(`Backend working succesfully on`);
-    console.log(`http://localhost:${PORT}/`);
+    console.log(`Backend running on port ${PORT}`);
   });
 } catch (error) {
   console.log(error);

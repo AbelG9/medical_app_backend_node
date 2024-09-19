@@ -29,7 +29,7 @@ export const getSpecialties = async (req, res) => {
   const specialtyRes = await conexion.specialty.findMany();
 
   if (specialtyRes.length == 0) {
-    return res.status(200).json({
+    return res.status(404).json({
       msg: "No Specialty found!",
     });
   }
