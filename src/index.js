@@ -3,6 +3,7 @@ import morgan from "morgan";
 import { patientApi } from "./router/patient.routes.js";
 import { specialtyApi } from "./router/specialty.route.js";
 import { specialistApi } from "./router/specialist.route.js";
+import { appoinmentApi } from "./router/appointment.router.js";
 import cors from "cors";
 
 const app = express();
@@ -32,6 +33,7 @@ app.use(errorHandler);
 app.use(`/api/v1/patients`, patientApi);
 app.use(`/api/v1/specialties`, specialtyApi);
 app.use(`/api/v1/specialists`, specialistApi);
+app.use(`/api/v1/appointments`, appoinmentApi);
 
 try {
   app.listen(PORT, () => {
