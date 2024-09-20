@@ -8,6 +8,7 @@ import {
   deleteSpecialist,
   getSpecialistsPaginated,
   getTotalRecords,
+  getSpecialistsByNameOrLastname,
 } from "../controllers/specialist.controller.js";
 
 import asyncHandler from "express-async-handler";
@@ -17,6 +18,10 @@ export const specialistApi = Router();
 specialistApi.route("/all").get(asyncHandler(getSpecialists));
 
 specialistApi.route("/totalCount").get(asyncHandler(getTotalRecords));
+
+specialistApi
+  .route("/byNameOrLastname")
+  .get(asyncHandler(getSpecialistsByNameOrLastname));
 
 specialistApi
   .route("/")

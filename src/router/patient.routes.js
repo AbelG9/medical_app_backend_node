@@ -8,6 +8,7 @@ import {
   deletePatient,
   getPatientsPaginated,
   getTotalRecords,
+  getPatientsByNameOrLastname,
 } from "../controllers/patient.controller.js";
 
 import asyncHandler from "express-async-handler";
@@ -19,11 +20,15 @@ patientApi.route("/all").get(asyncHandler(getPatients));
 patientApi.route("/totalCount").get(asyncHandler(getTotalRecords));
 
 patientApi
+  .route("/byNameOrLastname")
+  .get(asyncHandler(getPatientsByNameOrLastname));
+
+patientApi
   .route("/")
   .post(asyncHandler(createPatient))
   .get(asyncHandler(getPatientsPaginated));
 
-  patientApi
+patientApi
   .route("/:id")
   .get(asyncHandler(getPatientById))
   .put(asyncHandler(updatePatient))

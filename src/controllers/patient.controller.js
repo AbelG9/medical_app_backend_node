@@ -149,3 +149,22 @@ export const getTotalRecords = async (req, res) => {
     count: totalRecords,
   });
 }
+
+export const getPatientsByNameOrLastname = async (req, res) => {
+  const { value = "" } = req.query;
+
+  try {
+    const resPatient = await conexion.patient.findMany({
+      where: {
+        OR: [
+          { name: { contains: value, mode: "insensitive" } },
+          { lastname: { contains: value, mode: "insensitive" } },
+        ],
+      },
+    });
+    res.json(resPatient);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};

@@ -169,3 +169,22 @@ export const getTotalRecords = async (req, res) => {
     count: totalRecords,
   });
 };
+
+export const getSpecialistsByNameOrLastname = async (req, res) => {
+  const { value = "" } = req.query;
+
+  try {
+    const resSpecialist = await conexion.specialist.findMany({
+      where: {
+        OR: [
+          { name: { contains: value, mode: "insensitive" } },
+          { lastname: { contains: value, mode: "insensitive" } },
+        ],
+      },
+    });
+    res.json(resSpecialist);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
