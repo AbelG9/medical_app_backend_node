@@ -151,3 +151,23 @@ export const getTotalRecords = async (req, res) => {
     count: totalRecords,
   });
 };
+
+export const getAppointmentsByParams = async (req, res) => {
+  const { searchParam = "", value = "" } = req.query;
+
+  try {
+    const appointmentsRes = await conexion.appointment.findMany({
+      where: {
+        [searchParam]: { equals: +value },
+      },
+      include: {
+        patient: true,
+        specialist: true
+      }
+    });
+    res.json(appointmentsRes);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};

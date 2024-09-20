@@ -8,6 +8,7 @@ import {
   deleteAppointment,
   getAppointmentsPaginated,
   getTotalRecords,
+  getAppointmentsByParams,
 } from "../controllers/appoinment.controller.js";
 
 import asyncHandler from "express-async-handler";
@@ -17,6 +18,8 @@ export const appoinmentApi = Router();
 appoinmentApi.route("/all").get(asyncHandler(getAppointments));
 
 appoinmentApi.route("/totalCount").get(asyncHandler(getTotalRecords));
+
+appoinmentApi.route("/byParamId").get(asyncHandler(getAppointmentsByParams));
 
 appoinmentApi
   .route("/")
