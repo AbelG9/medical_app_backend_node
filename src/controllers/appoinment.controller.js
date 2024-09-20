@@ -137,7 +137,7 @@ export const getAppointmentsPaginated = async (req, res) => {
         id: "asc",
       },
     });
-    res.json(dataAppointment);
+    return res.status(200).json(dataAppointment);
   } catch (error) {
     console.log(error);
     return;
@@ -162,10 +162,33 @@ export const getAppointmentsByParams = async (req, res) => {
       },
       include: {
         patient: true,
-        specialist: true
-      }
+        specialist: true,
+      },
     });
-    res.json(appointmentsRes);
+    return res.status(200).json(appointmentsRes);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
+
+export const getAppointmentsByDateRange = async (req, res) => {
+  const { start, end } = req.query;
+
+  try {
+    const appointmentsRes = await conexion.appointment.findMany({
+      where: {
+        startTimeDate: {
+          gte: new Date(start),
+          lte: new Date(end),
+        },
+      },
+      include: {
+        patient: true,
+        specialist: true,
+      },
+    });
+    return res.status(200).json(appointmentsRes);
   } catch (error) {
     console.log(error);
     return;
