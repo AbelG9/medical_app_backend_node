@@ -10,10 +10,10 @@ datasource db {
 model Patient {
   id          Int      @id @default(autoincrement())
   name        String   @db.Text
-  lastname    String  @db.Text
-  numDocument String   @db.Text @map("num_document")
-  email       String   @db.Text @unique
-  sexName     String?  @db.Text @map("sex")
+  lastname    String   @db.Text
+  numDocument String   @map("num_document") @db.Text
+  email       String   @unique @db.Text
+  sexName     String?  @map("sex") @db.Text
   status      Boolean  @default(true)
   updatedAt   DateTime @updatedAt @map("updated_at")
   createdAt   DateTime @default(now()) @map("created_at")
@@ -27,7 +27,7 @@ model Specialty {
   id          Int      @id @default(autoincrement())
   name        String   @db.Text
   description String?  @db.Text
-  code        String?   @db.Text
+  code        String?  @db.Text
   status      Boolean  @default(true)
   updatedAt   DateTime @updatedAt @map("updated_at")
   createdAt   DateTime @default(now()) @map("created_at")
@@ -58,8 +58,8 @@ model Appointment {
   id            Int      @id @default(autoincrement())
   patientId     Int      @map("patient_id")
   doctorId      Int      @map("doctor_id")
-  officeNumber  String?   @map("office_number") @db.Text
-  details       String?   @db.Text
+  officeNumber  String?  @map("office_number") @db.Text
+  details       String?  @db.Text
   startTimeDate DateTime @map("start_timedate")
   endTimeDate   DateTime @map("end_timedate")
   status        Boolean  @default(true)
@@ -70,4 +70,22 @@ model Appointment {
   specialist Specialist @relation(fields: [doctorId], references: [id])
 
   @@map("appointments")
+}
+
+model User {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String
+  email     String    @unique
+  password  String
+  role      ROLE_USER @default(CLIENT)
+  status    Boolean   @default(true)
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@map("users")
+}
+
+enum ROLE_USER {
+  ADMIN
+  CLIENT
 }
